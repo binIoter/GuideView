@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">GuideView</string>
+
+    <string name="clickme">Click Me!</string>
+    <string name="action_settings">Settings</string>
+    <string name="welcome">欢迎访问首页</string>
+  <string name="title_activity_simple_guide_view">SimpleGuideViewActivity</string>
+  <string name="title_activity_muti_guide_view">MutiGuideViewActivity</string>
+</resources>
