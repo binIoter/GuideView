@@ -2,7 +2,7 @@
  * 本系统能够快速的为一个Activity里的任何一个View控件创建一个遮罩式的导航页。</p>
  * <h3>工作原理</h3>
  * 首先它需要一个目标View或者它的id,我们通过findViewById来得到这个View，计算它在屏幕上的区域targetRect,通过这个区域，开始绘制一个覆盖整个Activity的遮罩，可以定义遮罩的颜色和透明度，然而目标View的区域不会被绘制从而实现高亮的效果。接下来是在相对于这个targetRect的区域绘制一些图片或者文字。我们把这样一张图片或者文字抽象成一个Component接口，设置文字或者图片，所有的图片文字都是相对于targetRect来定义的。可以设定额外的x，y偏移量,可以对遮罩系统设置可见状态的发生变化时的监听回调，可以对遮罩系统设置开始和结束时的动画效，另外，我们可以不对整个Activity覆盖遮罩，而是对某一个View覆盖遮罩。</p>
- * ![image]( https://github.com/binIoter/GuideView/blob/master/app/src/main/res/assets/demo.gif )</p>
+ * ![image]( https://github.com/binIoter/GuideView/blob/master/app/src/main/res/assets/review.gif )</p>
 
  * <h3>usage</h3>
         public class SimpleComponent implements Component {
