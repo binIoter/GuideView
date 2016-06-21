@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Region;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -229,13 +230,12 @@ class MaskView extends ViewGroup {
     protected void dispatchDraw(Canvas canvas) {
         final long drawingTime = getDrawingTime();
         canvas.save();
-        // FIXME
-
-        canvas.drawRect(mFullingRect, mFullingPaint);
+        //修复目标view不高亮显示的bug
         if (!mOverlayTarget) {
-            canvas.drawRect(mTargetRect, mTargetPaint);
-            //canvas.clipRect(mTargetRect, Region.Op.DIFFERENCE);
+            canvas.clipRect(mTargetRect, Region.Op.DIFFERENCE);
         }
+        canvas.drawRect(mFullingRect, mFullingPaint);
+
         canvas.restore();
 
         try {

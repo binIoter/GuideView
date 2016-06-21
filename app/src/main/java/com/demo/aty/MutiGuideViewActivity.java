@@ -31,7 +31,7 @@ public class MutiGuideViewActivity extends AppCompatActivity {
         final GuideBuilder builder1 = new GuideBuilder();
         builder1.setTargetView(button1)
                 .setAlpha(150)
-                .setOverlayTarget(true)
+                .setOverlayTarget(false)
                 .setOutsideTouchable(false);
         builder1.setOnVisibilityChangedListener(new GuideBuilder.OnVisibilityChangedListener() {
             @Override
@@ -39,7 +39,6 @@ public class MutiGuideViewActivity extends AppCompatActivity {
                 //  Toast.makeText(MutiGuideViewActivity.this, "show", Toast.LENGTH_SHORT).show();
 
             }
-
             @Override
             public void onDismiss() {
                 button2.post(new Runnable() {
@@ -67,13 +66,13 @@ public class MutiGuideViewActivity extends AppCompatActivity {
         builder1.setOnVisibilityChangedListener(new GuideBuilder.OnVisibilityChangedListener() {
             @Override
             public void onShown() {
-              //  Toast.makeText(MutiGuideViewActivity.this, "show", Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(MutiGuideViewActivity.this, "show", Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onDismiss() {
-             //   Toast.makeText(MutiGuideViewActivity.this, "dismiss", Toast.LENGTH_SHORT).show();
+                //   Toast.makeText(MutiGuideViewActivity.this, "dismiss", Toast.LENGTH_SHORT).show();
             }
         });
 
