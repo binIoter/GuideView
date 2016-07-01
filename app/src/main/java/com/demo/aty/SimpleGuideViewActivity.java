@@ -28,7 +28,7 @@ public class SimpleGuideViewActivity extends AppCompatActivity {
     public void showGuideView() {
         GuideBuilder builder = new GuideBuilder();
         builder.setTargetView(button)
-               .setAlpha(150)
+               .setAlpha(150).setHighTargetCorner(20)
                .setOverlayTarget(false)
                .setOutsideTouchable(false);
         builder.setOnVisibilityChangedListener(new GuideBuilder.OnVisibilityChangedListener() {

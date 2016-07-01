@@ -3,6 +3,7 @@ package com.demo.aty;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
+import com.blog.www.guideview.Component;
 import com.blog.www.guideview.Guide;
 import com.blog.www.guideview.GuideBuilder;
 import com.demo.component.MutiComponent;
@@ -30,7 +31,7 @@ public class MutiGuideViewActivity extends AppCompatActivity {
     public void showGuideView() {
         final GuideBuilder builder1 = new GuideBuilder();
         builder1.setTargetView(button1)
-                .setAlpha(150)
+                .setAlpha(150).setHighTargetGraphStyle(Component.CIRCLE)
                 .setOverlayTarget(false)
                 .setOutsideTouchable(false);
         builder1.setOnVisibilityChangedListener(new GuideBuilder.OnVisibilityChangedListener() {
@@ -60,7 +61,7 @@ public class MutiGuideViewActivity extends AppCompatActivity {
     public void showGuideView2() {
         final GuideBuilder builder1 = new GuideBuilder();
         builder1.setTargetView(button2)
-                .setAlpha(150)
+                .setAlpha(150).setHighTargetGraphStyle(Component.CIRCLE)
                 .setOverlayTarget(false)
                 .setOutsideTouchable(false);
         builder1.setOnVisibilityChangedListener(new GuideBuilder.OnVisibilityChangedListener() {
