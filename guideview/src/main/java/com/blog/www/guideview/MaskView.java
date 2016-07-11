@@ -3,6 +3,7 @@ package com.blog.www.guideview;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -226,6 +227,7 @@ class MaskView extends ViewGroup {
     mPaint.setAntiAlias(true);
     mTargetPaint.setColor(0x00000000);
     mTargetPaint.setStrokeWidth(10);
+    mTargetPaint.setAntiAlias(true);
   }
 
   @Override protected void dispatchDraw(Canvas canvas) {
@@ -249,7 +251,7 @@ class MaskView extends ViewGroup {
       canvas.clipPath(mPath, Region.Op.DIFFERENCE);
     }
     canvas.drawRect(mFullingRect, mFullingPaint);
-
+    canvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG|Paint.FILTER_BITMAP_FLAG));
     canvas.restore();
 
     try {
