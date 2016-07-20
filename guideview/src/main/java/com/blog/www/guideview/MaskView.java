@@ -128,7 +128,6 @@ class MaskView extends ViewGroup {
       }
       mChildTmpRect.offset((int) (density * lp.offsetX + 0.5f),
           (int) (density * lp.offsetY + 0.5f));
-      // BdLog.d(TAG, "onLayout", "child layout to: " + mChildTmpRect);
       child.layout((int) mChildTmpRect.left, (int) mChildTmpRect.top, (int) mChildTmpRect.right,
           (int) mChildTmpRect.bottom);
     }
@@ -173,22 +172,18 @@ class MaskView extends ViewGroup {
   private void resetOutPath() {
     mOutPath.reset();
     mOutPath.addRect(mTargetRect, Path.Direction.CW);
-    // BdLog.d(TAG, "resetOutPath", "target rect = " + mTargetRect);
     mOutPath.addRect(mFullingRect, Path.Direction.CW);
-    // BdLog.d(TAG, "resetOutPath", "fulling rect = " + mFullingRect);
   }
 
   public void setTargetRect(Rect rect) {
     mTargetRect.set(rect);
     resetOutPath();
-    // BdLog.d(TAG, "settargetRect", "target rect = " + mTargetRect);
     invalidate();
   }
 
   public void setFullingRect(Rect rect) {
     mFullingRect.set(rect);
     resetOutPath();
-    // BdLog.d(TAG, "setFullingRect", "fulling rect = " + mFullingRect);
     mCustomFullingRect = true;
     invalidate();
   }

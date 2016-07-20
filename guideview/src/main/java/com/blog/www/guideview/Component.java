@@ -12,9 +12,9 @@ import android.view.View;
  * {@link #getXOffset()} <br>
  * {@link #getYOffset()}
  * <br>
- * 具体创建遮罩的说明请参加{@link com.demo.guide.GuideBuilder}
+ * 具体创建遮罩的说明请参加{@link com.blog.www.guideview.GuideBuilder}
  *
- * @see com.demo.guide.GuideBuilder
+ * @see com.blog.www.guideview.GuideBuilder
  * Created by binIoter
  */
 public interface Component {

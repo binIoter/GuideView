@@ -22,7 +22,7 @@ public class SimpleComponent implements Component {
     ll.setOrientation(LinearLayout.VERTICAL);
     ll.setLayoutParams(param);
     TextView textView = new TextView(inflater.getContext());
-    textView.setText(R.string.welcome);
+    textView.setText(R.string.add_friend);
     textView.setTextColor(inflater.getContext().getResources().getColor(R.color.color_white));
     textView.setTextSize(20);
     ImageView imageView = new ImageView(inflater.getContext());
@@ -39,7 +39,7 @@ public class SimpleComponent implements Component {
   }
 
   @Override public int getAnchor() {
-    return Component.ANCHOR_BOTTOM;
+    return Component.ANCHOR_LEFT;
   }
 
   @Override public int getFitPosition() {
@@ -51,6 +51,6 @@ public class SimpleComponent implements Component {
   }
 
   @Override public int getYOffset() {
-    return 30;
+    return 40;
   }
 }

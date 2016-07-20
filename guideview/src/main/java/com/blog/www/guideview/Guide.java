@@ -10,7 +10,7 @@ import android.view.animation.AnimationUtils;
 
 /**
  * 遮罩系统的封装 <br>
- * 外部需要调用{@link com.demo.guide.GuideBuilder}来创建该实例，实例创建后调用
+ * 外部需要调用{@link com.blog.www.guideview.GuideBuilder}来创建该实例，实例创建后调用
  * {@link #show(Activity)} 控制显示； 调用 {@link #dismiss()}让蒙板系统消失。 <br>
  *
  * Created by binIoter
@@ -20,7 +20,7 @@ public class Guide implements View.OnKeyListener, View.OnClickListener {
    * Cannot initialize out of package <font
    * color=red>包内才可见，外部使用时必须调用GuideBuilder来创建.</font>
    *
-   * @see com.demo.guide.GuideBuilder
+   * @see com.blog.www.guideview.GuideBuilder
    */
   Guide() {
   }
@@ -46,7 +46,7 @@ public class Guide implements View.OnKeyListener, View.OnClickListener {
 
   /**
    * 显示该遮罩, <br>
-   * 外部借助{@link com.demo.guide.GuideBuilder}
+   * 外部借助{@link com.blog.www.guideview.GuideBuilder}
    * 创建好一个Guide实例后，使用该实例调用本函数遮罩才会显示
    *
    * @param activity 目标Activity
