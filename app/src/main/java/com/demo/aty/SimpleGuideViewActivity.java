@@ -33,6 +33,7 @@ public class SimpleGuideViewActivity extends AppCompatActivity {
     builder.setTargetView(header_imgbtn)
         .setAlpha(150)
         .setHighTargetCorner(20)
+        .setHighTargetPadding(20)
         .setOverlayTarget(false)
         .setOutsideTouchable(false);
     builder.setOnVisibilityChangedListener(new GuideBuilder.OnVisibilityChangedListener() {
@@ -53,6 +54,7 @@ public class SimpleGuideViewActivity extends AppCompatActivity {
     guide.setShouldCheckLocInWindow(false);
     guide.show(SimpleGuideViewActivity.this);
   }
+
   public void showGuideView2() {
     final GuideBuilder builder1 = new GuideBuilder();
     builder1.setTargetView(ll_nearby)

@@ -144,6 +144,11 @@ public class Guide implements View.OnKeyListener, View.OnClickListener {
     maskView.setFullingColor(activity.getResources().getColor(mConfiguration.mFullingColorId));
     maskView.setFullingAlpha(mConfiguration.mAlpha);
     maskView.setHighTargetCorner(mConfiguration.mCorner);
+    maskView.setPadding(mConfiguration.mPadding);
+    maskView.setPaddingLeft(mConfiguration.mPaddingLeft);
+    maskView.setPaddingTop(mConfiguration.mPaddingTop);
+    maskView.setPaddingRight(mConfiguration.mPaddingRight);
+    maskView.setPaddingBottom(mConfiguration.mPaddingBottom);
     maskView.setHighTargetGraphStyle(mConfiguration.mGraphStyle);
     maskView.setOverlayTarget(mConfiguration.mOverlayTarget);
     maskView.setOnKeyListener(this);

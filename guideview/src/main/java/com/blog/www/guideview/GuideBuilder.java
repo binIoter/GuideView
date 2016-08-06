@@ -254,6 +254,76 @@ public class GuideBuilder {
   }
 
   /**
+   * 设置高亮区域的padding
+   *
+   * @return GuideBuilder
+   */
+  public GuideBuilder setHighTargetPadding(int padding) {
+    if (mBuilt) {
+      throw new BuildException("Already created. rebuild a new one.");
+    } else if (padding < 0) {
+      mConfiguration.mPadding = 0;
+    }
+    mConfiguration.mPadding = padding;
+    return this;
+  }
+  /**
+   * 设置高亮区域的左侧padding
+   *
+   * @return GuideBuilder
+   */
+  public GuideBuilder setHighTargetPaddingLeft(int padding) {
+    if (mBuilt) {
+      throw new BuildException("Already created. rebuild a new one.");
+    } else if (padding < 0) {
+      mConfiguration.mPaddingLeft = 0;
+    }
+    mConfiguration.mPaddingLeft = padding;
+    return this;
+  }
+  /**
+   * 设置高亮区域的顶部padding
+   *
+   * @return GuideBuilder
+   */
+  public GuideBuilder setHighTargetPaddingTop(int padding) {
+    if (mBuilt) {
+      throw new BuildException("Already created. rebuild a new one.");
+    } else if (padding < 0) {
+      mConfiguration.mPaddingTop = 0;
+    }
+    mConfiguration.mPaddingTop = padding;
+    return this;
+  }
+  /**
+   * 设置高亮区域的右侧padding
+   *
+   * @return GuideBuilder
+   */
+  public GuideBuilder setHighTargetPaddingRight(int padding) {
+    if (mBuilt) {
+      throw new BuildException("Already created. rebuild a new one.");
+    } else if (padding < 0) {
+      mConfiguration.mPaddingRight = 0;
+    }
+    mConfiguration.mPaddingRight = padding;
+    return this;
+  }
+  /**
+   * 设置高亮区域的底部padding
+   *
+   * @return GuideBuilder
+   */
+  public GuideBuilder setHighTargetPaddingBottom(int padding) {
+    if (mBuilt) {
+      throw new BuildException("Already created. rebuild a new one.");
+    } else if (padding < 0) {
+      mConfiguration.mPaddingBottom = 0;
+    }
+    mConfiguration.mPaddingBottom = padding;
+    return this;
+  }
+  /**
    * 创建Guide，非Fragment版本
    *
    * @return Guide

@@ -26,6 +26,11 @@ class MaskView extends ViewGroup {
   private final RectF mFullingRect = new RectF();
   private final RectF mChildTmpRect = new RectF();
   private final Paint mFullingPaint = new Paint();
+  private int mPadding = 0;
+  private int mPaddingLeft = 0;
+  private int mPaddingTop = 0;
+  private int mPaddingRight = 0;
+  private int mPaddingBottom = 0;
 
   private final Path mOutPath = new Path();
 
@@ -171,44 +176,36 @@ class MaskView extends ViewGroup {
 
   private void resetOutPath() {
     mOutPath.reset();
+    resetPadding();
     mOutPath.addRect(mTargetRect, Path.Direction.CW);
     mOutPath.addRect(mFullingRect, Path.Direction.CW);
   }
 
-  public void setTargetRect(Rect rect) {
-    mTargetRect.set(rect);
-    resetOutPath();
-    invalidate();
-  }
-
-  public void setFullingRect(Rect rect) {
-    mFullingRect.set(rect);
-    resetOutPath();
-    mCustomFullingRect = true;
-    invalidate();
-  }
-
-  public void setFullingAlpha(int alpha) {
-    mFullingPaint.setAlpha(alpha);
-    invalidate();
-  }
-
-  public void setFullingColor(int color) {
-    mFullingPaint.setColor(color);
-    invalidate();
-  }
-
-  public void setHighTargetCorner(int corner) {
-    this.mCorner = corner;
-  }
-
-  public void setHighTargetGraphStyle(int style) {
-    this.mStyle = style;
-  }
-
-  //todo
-  public void setOverlayTarget(boolean b) {
-    mOverlayTarget = b;
+  private void resetPadding() {
+    if (mPadding != 0 && mPaddingLeft == 0) {
+      mTargetRect.left -= mPadding;
+    }
+    if (mPadding != 0 && mPaddingTop == 0) {
+      mTargetRect.top -= mPadding;
+    }
+    if (mPadding != 0 && mPaddingRight == 0) {
+      mTargetRect.right += mPadding;
+    }
+    if (mPadding != 0 && mPaddingBottom == 0) {
+      mTargetRect.bottom += mPadding;
+    }
+    if (mPaddingLeft != 0) {
+      mTargetRect.left -= mPaddingLeft;
+    }
+    if (mPaddingTop != 0) {
+      mTargetRect.top -= mPaddingTop;
+    }
+    if (mPaddingRight != 0) {
+      mTargetRect.right += mPaddingRight;
+    }
+    if (mPaddingBottom != 0) {
+      mTargetRect.bottom += mPaddingBottom;
+    }
   }
 
   @Override protected LayoutParams generateDefaultLayoutParams() {
@@ -228,6 +225,7 @@ class MaskView extends ViewGroup {
   @Override protected void dispatchDraw(Canvas canvas) {
     final long drawingTime = getDrawingTime();
     canvas.save();
+
     //修复目标view不高亮显示的bug
     if (!mOverlayTarget) {
       Path mPath = new Path();
@@ -246,7 +244,8 @@ class MaskView extends ViewGroup {
       canvas.clipPath(mPath, Region.Op.DIFFERENCE);
     }
     canvas.drawRect(mFullingRect, mFullingPaint);
-    canvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG|Paint.FILTER_BITMAP_FLAG));
+    canvas.setDrawFilter(
+        new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
     canvas.restore();
 
     try {
@@ -288,5 +287,61 @@ class MaskView extends ViewGroup {
     public LayoutParams(ViewGroup.LayoutParams source) {
       super(source);
     }
+  }
+
+  public void setTargetRect(Rect rect) {
+    mTargetRect.set(rect);
+    resetOutPath();
+    invalidate();
+  }
+
+  public void setFullingRect(Rect rect) {
+    mFullingRect.set(rect);
+    resetOutPath();
+    mCustomFullingRect = true;
+    invalidate();
+  }
+
+  public void setFullingAlpha(int alpha) {
+    mFullingPaint.setAlpha(alpha);
+    invalidate();
+  }
+
+  public void setFullingColor(int color) {
+    mFullingPaint.setColor(color);
+    invalidate();
+  }
+
+  public void setHighTargetCorner(int corner) {
+    this.mCorner = corner;
+  }
+
+  public void setHighTargetGraphStyle(int style) {
+    this.mStyle = style;
+  }
+
+  //todo
+  public void setOverlayTarget(boolean b) {
+    mOverlayTarget = b;
+  }
+
+  public void setPadding(int padding) {
+    this.mPadding = padding;
+  }
+
+  public void setPaddingLeft(int paddingLeft) {
+    this.mPaddingLeft = paddingLeft;
+  }
+
+  public void setPaddingTop(int paddingTop) {
+    this.mPaddingTop = paddingTop;
+  }
+
+  public void setPaddingRight(int paddingRight) {
+    this.mPaddingRight = paddingRight;
+  }
+
+  public void setPaddingBottom(int paddingBottom) {
+    this.mPaddingBottom = paddingBottom;
   }
 }

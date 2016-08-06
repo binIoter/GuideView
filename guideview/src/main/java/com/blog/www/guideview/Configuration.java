@@ -16,6 +16,27 @@ class Configuration implements Parcelable {
   View mTargetView = null;
 
   /**
+   * 高亮区域的padding
+   */
+  int mPadding = 0;
+  /**
+   * 高亮区域的左侧padding
+   */
+  int mPaddingLeft = 0;
+  /**
+   * 高亮区域的顶部padding
+   */
+  int mPaddingTop = 0;
+  /**
+   * 高亮区域的右侧padding
+   */
+  int mPaddingRight = 0;
+  /**
+   * 高亮区域的底部padding
+   */
+  int mPaddingBottom = 0;
+
+  /**
    *
    */
   boolean mOutsideTouchable;
@@ -78,6 +99,11 @@ class Configuration implements Parcelable {
     dest.writeInt(mTargetViewId);
     dest.writeInt(mFullingColorId);
     dest.writeInt(mCorner);
+    dest.writeInt(mPadding);
+    dest.writeInt(mPaddingLeft);
+    dest.writeInt(mPaddingTop);
+    dest.writeInt(mPaddingRight);
+    dest.writeInt(mPaddingBottom);
     dest.writeInt(mGraphStyle);
     dest.writeByte((byte) (mAutoDismiss ? 1 : 0));
     dest.writeByte((byte) (mOverlayTarget ? 1 : 0));
@@ -91,6 +117,11 @@ class Configuration implements Parcelable {
       conf.mTargetViewId = source.readInt();
       conf.mFullingColorId = source.readInt();
       conf.mCorner = source.readInt();
+      conf.mPadding = source.readInt();
+      conf.mPaddingLeft = source.readInt();
+      conf.mPaddingTop = source.readInt();
+      conf.mPaddingRight = source.readInt();
+      conf.mPaddingBottom = source.readInt();
       conf.mGraphStyle = source.readInt();
       conf.mAutoDismiss = source.readByte() == 1;
       conf.mOverlayTarget = source.readByte() == 1;
