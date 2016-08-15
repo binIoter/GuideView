@@ -24,18 +24,18 @@ public class SimpleComponent implements Component {
   }
 
   @Override public int getAnchor() {
-    return Component.ANCHOR_LEFT;
+    return Component.ANCHOR_BOTTOM;
   }
 
   @Override public int getFitPosition() {
-    return Component.FIT_START;
+    return Component.FIT_END;
   }
 
   @Override public int getXOffset() {
-    return -30;
+    return 0;
   }
 
   @Override public int getYOffset() {
-    return 60;
+    return 10;
   }
 }

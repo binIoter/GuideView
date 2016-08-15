@@ -34,10 +34,21 @@ class MaskView extends ViewGroup {
 
   private final Path mOutPath = new Path();
 
+  private final Paint mTargetPaint = new Paint();
+  private final Paint mPaint = new Paint();
+
   private boolean mCustomFullingRect;
   private boolean mOverlayTarget;
   private int mCorner = 0;
   private int mStyle = Component.ROUNDRECT;
+
+  //构造快优先于构造方法执行
+  {
+    mPaint.setAntiAlias(true);
+    mTargetPaint.setColor(0x00000000);
+    mTargetPaint.setStrokeWidth(10);
+    mTargetPaint.setAntiAlias(true);
+  }
 
   public MaskView(Context context) {
     this(context, null, 0);
@@ -50,10 +61,10 @@ class MaskView extends ViewGroup {
   public MaskView(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
     setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT));
-    setFocusable(true);
-    setFocusableInTouchMode(true);
+    setFocusable(true);//键盘是否能获得焦点
+    setFocusableInTouchMode(true);//触摸是否能获得焦点
     requestFocus();
-    mOutPath.setFillType(Path.FillType.EVEN_ODD);
+    mOutPath.setFillType(Path.FillType.EVEN_ODD);//设置填充模式，取path所在并不相交区域
     resetOutPath();
   }
 
@@ -67,8 +78,9 @@ class MaskView extends ViewGroup {
   }
 
   @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-    final int w = widthMeasureSpec & ~(0x3 << 30);
-    final int h = heightMeasureSpec & ~(0x3 << 30);
+    super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    final int w = MeasureSpec.getSize(widthMeasureSpec);
+    final int h = MeasureSpec.getSize(heightMeasureSpec);
     setMeasuredDimension(w, h);
     if (!mCustomFullingRect) {
       mFullingRect.set(0, 0, w, h);
@@ -103,27 +115,27 @@ class MaskView extends ViewGroup {
         continue;
       }
       switch (lp.targetAnchor) {
-        case LayoutParams.ANCHOR_LEFT:
+        case LayoutParams.ANCHOR_LEFT://左
           mChildTmpRect.right = mTargetRect.left;
           mChildTmpRect.left = mChildTmpRect.right - child.getMeasuredWidth();
           verticalChildPositionLayout(child, mChildTmpRect, lp.targetParentPosition);
           break;
-        case LayoutParams.ANCHOR_TOP:
+        case LayoutParams.ANCHOR_TOP://上
           mChildTmpRect.bottom = mTargetRect.top;
           mChildTmpRect.top = mChildTmpRect.bottom - child.getMeasuredHeight();
           horizontalChildPositionLayout(child, mChildTmpRect, lp.targetParentPosition);
           break;
-        case LayoutParams.ANCHOR_RIGHT:
+        case LayoutParams.ANCHOR_RIGHT://右
           mChildTmpRect.left = mTargetRect.right;
           mChildTmpRect.right = mChildTmpRect.left + child.getMeasuredWidth();
           verticalChildPositionLayout(child, mChildTmpRect, lp.targetParentPosition);
           break;
-        case LayoutParams.ANCHOR_BOTTOM:
+        case LayoutParams.ANCHOR_BOTTOM://下
           mChildTmpRect.top = mTargetRect.bottom;
           mChildTmpRect.bottom = mChildTmpRect.top + child.getMeasuredHeight();
           horizontalChildPositionLayout(child, mChildTmpRect, lp.targetParentPosition);
           break;
-        case LayoutParams.ANCHOR_OVER:
+        case LayoutParams.ANCHOR_OVER://中心
           mChildTmpRect.left = ((int) mTargetRect.width() - child.getMeasuredWidth()) >> 1;
           mChildTmpRect.top = ((int) mTargetRect.height() - child.getMeasuredHeight()) >> 1;
           mChildTmpRect.right = ((int) mTargetRect.width() + child.getMeasuredWidth()) >> 1;
@@ -131,6 +143,7 @@ class MaskView extends ViewGroup {
           mChildTmpRect.offset(mTargetRect.left, mTargetRect.top);
           break;
       }
+      //额外的xy偏移
       mChildTmpRect.offset((int) (density * lp.offsetX + 0.5f),
           (int) (density * lp.offsetY + 0.5f));
       child.layout((int) mChildTmpRect.left, (int) mChildTmpRect.top, (int) mChildTmpRect.right,
@@ -181,6 +194,9 @@ class MaskView extends ViewGroup {
     mOutPath.addRect(mFullingRect, Path.Direction.CW);
   }
 
+  /**
+   * 设置padding
+   */
   private void resetPadding() {
     if (mPadding != 0 && mPaddingLeft == 0) {
       mTargetRect.left -= mPadding;
@@ -212,21 +228,10 @@ class MaskView extends ViewGroup {
     return new LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
   }
 
-  private final Paint mTargetPaint = new Paint();
-  private final Paint mPaint = new Paint();
-
-  {
-    mPaint.setAntiAlias(true);
-    mTargetPaint.setColor(0x00000000);
-    mTargetPaint.setStrokeWidth(10);
-    mTargetPaint.setAntiAlias(true);
-  }
-
   @Override protected void dispatchDraw(Canvas canvas) {
     final long drawingTime = getDrawingTime();
     canvas.save();
 
-    //修复目标view不高亮显示的bug
     if (!mOverlayTarget) {
       Path mPath = new Path();
       switch (mStyle) {
@@ -243,7 +248,9 @@ class MaskView extends ViewGroup {
       }
       canvas.clipPath(mPath, Region.Op.DIFFERENCE);
     }
+    //画遮罩
     canvas.drawRect(mFullingRect, mFullingPaint);
+    //抗锯齿
     canvas.setDrawFilter(
         new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
     canvas.restore();
@@ -256,36 +263,6 @@ class MaskView extends ViewGroup {
       }
     } catch (NullPointerException e) {
 
-    }
-  }
-
-  static class LayoutParams extends ViewGroup.LayoutParams {
-
-    public static final int ANCHOR_LEFT = 0x01;
-    public static final int ANCHOR_TOP = 0x02;
-    public static final int ANCHOR_RIGHT = 0x03;
-    public static final int ANCHOR_BOTTOM = 0x04;
-    public static final int ANCHOR_OVER = 0x05;
-
-    public static final int PARENT_START = 0x10;
-    public static final int PARENT_CENTER = 0x20;
-    public static final int PARENT_END = 0x30;
-
-    public int targetAnchor = ANCHOR_BOTTOM;
-    public int targetParentPosition = PARENT_CENTER;
-    public int offsetX = 0;
-    public int offsetY = 0;
-
-    public LayoutParams(Context c, AttributeSet attrs) {
-      super(c, attrs);
-    }
-
-    public LayoutParams(int width, int height) {
-      super(width, height);
-    }
-
-    public LayoutParams(ViewGroup.LayoutParams source) {
-      super(source);
     }
   }
 
@@ -320,7 +297,6 @@ class MaskView extends ViewGroup {
     this.mStyle = style;
   }
 
-  //todo
   public void setOverlayTarget(boolean b) {
     mOverlayTarget = b;
   }
@@ -343,5 +319,35 @@ class MaskView extends ViewGroup {
 
   public void setPaddingBottom(int paddingBottom) {
     this.mPaddingBottom = paddingBottom;
+  }
+
+  static class LayoutParams extends ViewGroup.LayoutParams {
+
+    public static final int ANCHOR_LEFT = 0x01;
+    public static final int ANCHOR_TOP = 0x02;
+    public static final int ANCHOR_RIGHT = 0x03;
+    public static final int ANCHOR_BOTTOM = 0x04;
+    public static final int ANCHOR_OVER = 0x05;
+
+    public static final int PARENT_START = 0x10;
+    public static final int PARENT_CENTER = 0x20;
+    public static final int PARENT_END = 0x30;
+
+    public int targetAnchor = ANCHOR_BOTTOM;
+    public int targetParentPosition = PARENT_CENTER;
+    public int offsetX = 0;
+    public int offsetY = 0;
+
+    public LayoutParams(Context c, AttributeSet attrs) {
+      super(c, attrs);
+    }
+
+    public LayoutParams(int width, int height) {
+      super(width, height);
+    }
+
+    public LayoutParams(ViewGroup.LayoutParams source) {
+      super(source);
+    }
   }
 }

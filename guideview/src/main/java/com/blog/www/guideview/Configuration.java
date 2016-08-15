@@ -109,7 +109,7 @@ class Configuration implements Parcelable {
     dest.writeByte((byte) (mOverlayTarget ? 1 : 0));
   }
 
-  public static Creator<Configuration> CREATOR = new Creator<Configuration>() {
+  public static final Creator<Configuration> CREATOR = new Creator<Configuration>() {
     @Override public Configuration createFromParcel(Parcel source) {
       Configuration conf = new Configuration();
       conf.mAlpha = source.readInt();

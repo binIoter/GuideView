@@ -159,7 +159,7 @@ public class Guide implements View.OnKeyListener, View.OnClickListener {
     int parentY = 0;
     final int[] loc = new int[2];
     content.getLocationInWindow(loc);
-    parentY = loc[1];
+    parentY = loc[1];//通知栏的高度
     if (mShouldCheckLocInWindow && parentY == 0) {
       Class<?> localClass;
       try {

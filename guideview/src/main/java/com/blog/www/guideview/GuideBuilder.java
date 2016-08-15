@@ -40,6 +40,9 @@ public class GuideBuilder {
 
   private Configuration mConfiguration;
 
+  /**
+   * Builder被创建后，不允许在对它进行更改
+   */
   private boolean mBuilt;
 
   private List<Component> mComponents = new ArrayList<Component>();
@@ -267,6 +270,7 @@ public class GuideBuilder {
     mConfiguration.mPadding = padding;
     return this;
   }
+
   /**
    * 设置高亮区域的左侧padding
    *
@@ -281,6 +285,7 @@ public class GuideBuilder {
     mConfiguration.mPaddingLeft = padding;
     return this;
   }
+
   /**
    * 设置高亮区域的顶部padding
    *
@@ -295,6 +300,7 @@ public class GuideBuilder {
     mConfiguration.mPaddingTop = padding;
     return this;
   }
+
   /**
    * 设置高亮区域的右侧padding
    *
@@ -309,6 +315,7 @@ public class GuideBuilder {
     mConfiguration.mPaddingRight = padding;
     return this;
   }
+
   /**
    * 设置高亮区域的底部padding
    *
@@ -323,6 +330,7 @@ public class GuideBuilder {
     mConfiguration.mPaddingBottom = padding;
     return this;
   }
+
   /**
    * 创建Guide，非Fragment版本
    *
