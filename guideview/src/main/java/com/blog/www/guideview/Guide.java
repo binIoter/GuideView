@@ -11,7 +11,7 @@ import android.view.animation.AnimationUtils;
 /**
  * 遮罩系统的封装 <br>
  * 外部需要调用{@link com.blog.www.guideview.GuideBuilder}来创建该实例，实例创建后调用
- * {@link #show(Activity)} 控制显示； 调用 {@link #dismiss()}让蒙板系统消失。 <br>
+ * {@link #show(Activity)} 控制显示； 调用 {@link #dismiss()}让遮罩系统消失。 <br>
  *
  * Created by binIoter
  */
