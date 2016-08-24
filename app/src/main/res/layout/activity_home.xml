@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  tools:context="com.demo.aty.HomeActivity">
+
+  <Button
+    android:id="@+id/btn_aty"
+    android:layout_width="match_parent"
+    android:layout_height="47dp"
+    android:text="遮罩整个activity" />
+
+  <Button
+    android:id="@+id/btn_view"
+    android:layout_width="match_parent"
+    android:layout_height="47dp"
+    android:text="遮罩某个view" />
+
+  <Button
+    android:id="@+id/btn_list"
+    android:layout_width="match_parent"
+    android:layout_height="47dp"
+    android:text="遮罩listview" />
+
+  <Button
+    android:id="@+id/btn_frag"
+    android:layout_width="match_parent"
+    android:layout_height="47dp"
+    android:text="遮罩整个fragment" />
+
+  <Button
+    android:id="@+id/btn_frag_view"
+    android:layout_width="match_parent"
+    android:layout_height="47dp"
+    android:text="遮罩fragment中的某个view" />
+
+  <Button
+    android:id="@+id/btn_more"
+    android:layout_width="match_parent"
+    android:layout_height="47dp"
+    android:text="单个页面多个遮罩" />
+</LinearLayout>

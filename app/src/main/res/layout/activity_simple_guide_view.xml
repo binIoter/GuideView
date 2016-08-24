@@ -1,277 +1,275 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent" android:layout_height="match_parent"
-  android:orientation="vertical"
-  >
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
 
-  <include layout="@layout/layout_main_title"/>
-  <include layout="@layout/layout_searchbar"/>
+  <include layout="@layout/layout_main_title" />
+
+  <include layout="@layout/layout_searchbar" />
+<LinearLayout
+  android:layout_width="match_parent"
+  android:orientation="vertical"
+  android:id="@+id/ll_view_group"
+  android:layout_height="wrap_content">
   <LinearLayout
-    android:layout_marginTop="10dp"
-    android:paddingTop="15dp"
-    android:paddingBottom="5dp"
+    android:id="@+id/ll_line"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
     android:background="#fff"
-    >
+    android:paddingBottom="5dp"
+    android:paddingTop="15dp">
+
     <LinearLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_weight="1"
-      android:orientation="vertical"
-      >
+      android:orientation="vertical">
+
       <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/qzone_btn_1"
         android:layout_gravity="center"
-        />
+        android:background="@drawable/qzone_btn_1" />
+
       <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
         android:text="好友动态"
-        android:textSize="15sp"
         android:textColor="#000"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_gravity="center"
-        />
+        android:textSize="15sp" />
     </LinearLayout>
+
     <LinearLayout
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"
       android:id="@+id/ll_nearby"
-      android:orientation="vertical"
-      >
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:orientation="vertical">
+
       <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/qzone_btn_2"
         android:layout_gravity="center"
-        />
+        android:background="@drawable/qzone_btn_2" />
+
       <TextView
-        android:text="附近"
-        android:textSize="15sp"
-        android:textColor="#000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_gravity="center"
-        />
+        android:layout_marginTop="5dp"
+        android:text="附近"
+        android:textColor="#000"
+        android:textSize="15sp" />
     </LinearLayout>
+
     <LinearLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_weight="1"
-      android:orientation="vertical"
-      >
+      android:orientation="vertical">
+
       <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/qzone_btn_3"
         android:layout_gravity="center"
-        />
+        android:background="@drawable/qzone_btn_3" />
+
       <TextView
-        android:text="兴趣部落"
-        android:textSize="15sp"
-        android:textColor="#000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_gravity="center"
-        />
+        android:layout_marginTop="5dp"
+        android:text="兴趣部落"
+        android:textColor="#000"
+        android:textSize="15sp" />
     </LinearLayout>
 
   </LinearLayout>
 
 
-
   <LinearLayout
-    android:layout_marginTop="20dp"
-    android:paddingLeft="15dp"
-    android:paddingRight="5dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_marginTop="20dp"
     android:background="#fff"
-    >
+    android:orientation="vertical"
+    android:paddingLeft="15dp"
+    android:paddingRight="5dp">
     <!-- 游戏-->
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="horizontal"
       android:layout_marginTop="10dp"
-      >
+      android:orientation="horizontal">
+
       <ImageView
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:background="@drawable/qzone_game"
-        />
+        android:background="@drawable/qzone_game" />
+
       <TextView
-        android:text="游戏"
-        android:textSize="15sp"
-        android:textColor="#000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_gravity="center"
         android:layout_marginLeft="8dp"
-        />
+        android:layout_weight="1"
+        android:text="游戏"
+        android:textColor="#000"
+        android:textSize="15sp" />
+
       <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/qzone_arrow"
         android:layout_gravity="center"
-        />
+        android:background="@drawable/qzone_arrow" />
     </LinearLayout>
+
     <View
-      android:background="#A8A8A8"
       android:layout_width="match_parent"
       android:layout_height="1px"
       android:layout_marginTop="5dp"
-      />
+      android:background="#A8A8A8" />
 
     <!-- 音乐-->
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="horizontal"
       android:layout_marginTop="10dp"
-      >
+      android:orientation="horizontal">
+
       <ImageView
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:background="@drawable/qzone_music"
-        />
+        android:background="@drawable/qzone_music" />
+
       <TextView
-        android:text="音乐"
-        android:textSize="15sp"
-        android:textColor="#000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_gravity="center"
         android:layout_marginLeft="8dp"
-        />
+        android:layout_weight="1"
+        android:text="音乐"
+        android:textColor="#000"
+        android:textSize="15sp" />
+
       <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/qzone_arrow"
         android:layout_gravity="center"
-        />
+        android:background="@drawable/qzone_arrow" />
     </LinearLayout>
   </LinearLayout>
 
-
+</LinearLayout>
   <LinearLayout
-    android:layout_marginTop="20dp"
-    android:paddingLeft="15dp"
-    android:paddingRight="5dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_marginTop="20dp"
     android:background="#fff"
-    >
+    android:orientation="vertical"
+    android:paddingLeft="15dp"
+    android:paddingRight="5dp">
     <!-- 附近的群-->
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="horizontal"
       android:layout_marginTop="10dp"
-      >
+      android:orientation="horizontal">
+
       <ImageView
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:background="@drawable/qzone_group"
-        />
+        android:background="@drawable/qzone_group" />
+
       <TextView
-        android:text="附近的群"
-        android:textSize="15sp"
-        android:textColor="#000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_gravity="center"
         android:layout_marginLeft="8dp"
-        />
+        android:layout_weight="1"
+        android:text="附近的群"
+        android:textColor="#000"
+        android:textSize="15sp" />
+
       <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/qzone_arrow"
         android:layout_gravity="center"
-        />
+        android:background="@drawable/qzone_arrow" />
     </LinearLayout>
+
     <View
-      android:background="#A8A8A8"
       android:layout_width="match_parent"
       android:layout_height="1px"
       android:layout_marginTop="5dp"
-      />
+      android:background="#A8A8A8" />
 
     <!-- 腾讯课堂-->
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="horizontal"
       android:layout_marginTop="10dp"
-      >
+      android:orientation="horizontal">
+
       <ImageView
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:background="@drawable/qzone_edu"
-        />
+        android:background="@drawable/qzone_edu" />
+
       <TextView
-        android:text="腾讯课堂"
-        android:textSize="15sp"
-        android:textColor="#000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_gravity="center"
         android:layout_marginLeft="8dp"
-        />
+        android:layout_weight="1"
+        android:text="腾讯课堂"
+        android:textColor="#000"
+        android:textSize="15sp" />
+
       <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/qzone_arrow"
         android:layout_gravity="center"
-        />
+        android:background="@drawable/qzone_arrow" />
     </LinearLayout>
+
     <View
-      android:background="#A8A8A8"
       android:layout_width="match_parent"
       android:layout_height="1px"
       android:layout_marginTop="5dp"
-      />
+      android:background="#A8A8A8" />
 
     <!-- 直播间-->
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="horizontal"
       android:layout_marginTop="10dp"
-      >
+      android:orientation="horizontal">
+
       <ImageView
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:background="@drawable/qzone_live"
-        />
+        android:background="@drawable/qzone_live" />
+
       <TextView
-        android:text="直播间"
-        android:textSize="15sp"
-        android:textColor="#000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_gravity="center"
         android:layout_marginLeft="8dp"
-        />
+        android:layout_weight="1"
+        android:text="直播间"
+        android:textColor="#000"
+        android:textSize="15sp" />
+
       <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/qzone_arrow"
         android:layout_gravity="center"
-        />
+        android:background="@drawable/qzone_arrow" />
     </LinearLayout>
   </LinearLayout>
 

@@ -7,4 +7,7 @@
   <string name="nearby">查看附近的人</string>
   <string name="title_activity_simple_guide_view">SimpleGuideViewActivity</string>
   <string name="title_activity_muti_guide_view">MutiGuideViewActivity</string>
+
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -43,7 +43,7 @@ public class MutiComponent implements Component {
   }
 
   @Override public int getFitPosition() {
-    return Component.FIT_START;
+    return Component.FIT_CENTER;
   }
 
   @Override public int getXOffset() {
@@ -51,6 +51,6 @@ public class MutiComponent implements Component {
   }
 
   @Override public int getYOffset() {
-    return 30;
+    return 20;
   }
 }
