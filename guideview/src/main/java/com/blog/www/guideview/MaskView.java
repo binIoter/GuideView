@@ -1,18 +1,20 @@
 package com.blog.www.guideview;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PaintFlagsDrawFilter;
-import android.graphics.Path;
+import android.graphics.Point;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Region;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 /**
@@ -31,24 +33,15 @@ class MaskView extends ViewGroup {
   private int mPaddingTop = 0;
   private int mPaddingRight = 0;
   private int mPaddingBottom = 0;
-
-  private final Path mOutPath = new Path();
-
-  private final Paint mTargetPaint = new Paint();
-  private final Paint mPaint = new Paint();
-
   private boolean mCustomFullingRect;
   private boolean mOverlayTarget;
   private int mCorner = 0;
   private int mStyle = Component.ROUNDRECT;
-
-  //构造快优先于构造方法执行
-  {
-    mPaint.setAntiAlias(true);
-    mTargetPaint.setColor(0x00000000);
-    mTargetPaint.setStrokeWidth(10);
-    mTargetPaint.setAntiAlias(true);
-  }
+  private Paint mEraser;
+  private Bitmap mEraserBitmap;
+  private Canvas mEraserCanvas;
+  private Paint mPaint;
+  private Paint transparentPaint;
 
   public MaskView(Context context) {
     this(context, null, 0);
@@ -60,18 +53,32 @@ class MaskView extends ViewGroup {
 
   public MaskView(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
-    setLayoutParams(new ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT));
-    setFocusable(true);//键盘是否能获得焦点
-    setFocusableInTouchMode(true);//触摸是否能获得焦点
-    requestFocus();
-    mOutPath.setFillType(Path.FillType.EVEN_ODD);//设置填充模式，取path所在并不相交区域
-    resetOutPath();
+    setWillNotDraw(false);
+    Point size = new Point();
+    size.x = getResources().getDisplayMetrics().widthPixels;
+    size.y = getResources().getDisplayMetrics().heightPixels;
+
+    mEraserBitmap = Bitmap.createBitmap(size.x, size.y, Bitmap.Config.ARGB_8888);
+    mEraserCanvas = new Canvas(mEraserBitmap);
+
+    mPaint = new Paint();
+    mPaint.setColor(0xcc000000);
+    transparentPaint = new Paint();
+    transparentPaint.setColor(getResources().getColor(android.R.color.transparent));
+    transparentPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+
+    mEraser = new Paint();
+    mEraser.setColor(0xFFFFFFFF);
+    mEraser.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+    mEraser.setFlags(Paint.ANTI_ALIAS_FLAG);
   }
 
   @Override protected void onDetachedFromWindow() {
     super.onDetachedFromWindow();
     try {
       clearFocus();
+      mEraserCanvas.setBitmap(null);
+      mEraserBitmap = null;
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -188,10 +195,7 @@ class MaskView extends ViewGroup {
   }
 
   private void resetOutPath() {
-    mOutPath.reset();
     resetPadding();
-    mOutPath.addRect(mTargetRect, Path.Direction.CW);
-    mOutPath.addRect(mFullingRect, Path.Direction.CW);
   }
 
   /**
@@ -230,31 +234,6 @@ class MaskView extends ViewGroup {
 
   @Override protected void dispatchDraw(Canvas canvas) {
     final long drawingTime = getDrawingTime();
-    canvas.save();
-
-    if (!mOverlayTarget) {
-      Path mPath = new Path();
-      switch (mStyle) {
-        case Component.ROUNDRECT:
-          mPath.addRoundRect(mTargetRect, mCorner, mCorner, Path.Direction.CCW);
-          break;
-        case Component.CIRCLE:
-          mPath.addCircle(mTargetRect.centerX(), mTargetRect.centerY(), mTargetRect.width() / 2,
-              Path.Direction.CCW);
-          break;
-        default:
-          mPath.addRoundRect(mTargetRect, mCorner, mCorner, Path.Direction.CCW);
-          break;
-      }
-      canvas.clipPath(mPath, Region.Op.DIFFERENCE);
-    }
-    //画遮罩
-    canvas.drawRect(mFullingRect, mFullingPaint);
-    //抗锯齿
-    canvas.setDrawFilter(
-        new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
-    canvas.restore();
-
     try {
       View child;
       for (int i = 0; i < getChildCount(); i++) {
@@ -263,6 +242,27 @@ class MaskView extends ViewGroup {
       }
     } catch (NullPointerException e) {
 
+    }
+  }
+
+  @Override protected void onDraw(Canvas canvas) {
+    super.onDraw(canvas);
+    mEraserBitmap.eraseColor(Color.TRANSPARENT);
+    mEraserCanvas.drawColor(mFullingPaint.getColor());
+    if (!mOverlayTarget) {
+      switch (mStyle) {
+        case Component.ROUNDRECT:
+          mEraserCanvas.drawRoundRect(mTargetRect, mCorner, mCorner, mEraser);
+          break;
+        case Component.CIRCLE:
+          mEraserCanvas.drawCircle(mTargetRect.centerX(), mTargetRect.centerY(),
+              mTargetRect.width() / 2, mEraser);
+          break;
+        default:
+          mEraserCanvas.drawRoundRect(mTargetRect, mCorner, mCorner, mEraser);
+          break;
+      }
+      canvas.drawBitmap(mEraserBitmap, 0, 0, null);
     }
   }
 
