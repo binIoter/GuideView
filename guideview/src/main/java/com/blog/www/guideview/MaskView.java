@@ -41,7 +41,7 @@ class MaskView extends ViewGroup {
   private Bitmap mEraserBitmap;
   private Canvas mEraserCanvas;
   private Paint mPaint;
-  private Paint transparentPaint;
+//   private Paint transparentPaint;
 
   public MaskView(Context context) {
     this(context, null, 0);
@@ -63,9 +63,9 @@ class MaskView extends ViewGroup {
 
     mPaint = new Paint();
     mPaint.setColor(0xcc000000);
-    transparentPaint = new Paint();
-    transparentPaint.setColor(getResources().getColor(android.R.color.transparent));
-    transparentPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+//     transparentPaint = new Paint();
+//     transparentPaint.setColor(getResources().getColor(android.R.color.transparent));
+//     transparentPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
 
     mEraser = new Paint();
     mEraser.setColor(0xFFFFFFFF);
