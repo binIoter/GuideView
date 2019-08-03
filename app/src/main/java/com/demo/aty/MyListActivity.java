@@ -68,7 +68,7 @@ public class MyListActivity extends Activity {
         holder = (ViewHolder) view.getTag();
       }
       holder.btn.setText(arrayList.get(i));
-      if (i == 0 && showTimes == 0) {
+      if (i == 5 && showTimes == 0) {
         final View finalView = view;
         view.post(new Runnable() {
           @Override public void run() {
@@ -83,7 +83,6 @@ public class MyListActivity extends Activity {
       showTimes++;
       GuideBuilder builder = new GuideBuilder();
       builder.setTargetView(targetView)
-          .setFullingViewId(R.id.ll_view_group)
           .setAlpha(150)
           .setHighTargetCorner(20)
           .setHighTargetPadding(10)

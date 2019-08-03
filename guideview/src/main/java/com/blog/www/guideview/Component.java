@@ -4,19 +4,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 /**
- * 遮罩系统中相对于目标区域而绘制一些图片或者文字等view需要实现的接口. <br>
- * <br>
- * {@link #getView(LayoutInflater)} <br>
- * {@link #getAnchor()} <br>
- * {@link #getFitPosition()} <br>
- * {@link #getXOffset()} <br>
- * {@link #getYOffset()}
- * <br>
- * 具体创建遮罩的说明请参加{@link com.blog.www.guideview.GuideBuilder}
+ * * 遮罩系统中相对于目标区域而绘制一些图片或者文字等view需要实现的接口. <br>
+ *  * <br>
+ *  * {@link #getView(LayoutInflater)} <br>
+ *  * {@link #getAnchor()} <br>
+ *  * {@link #getFitPosition()} <br>
+ *  * {@link #getXOffset()} <br>
+ *  * {@link #getYOffset()}
+ *  * <br>
+ *  * 具体创建遮罩的说明请参加{@link GuideBuilder}
+ *  *
  *
- * @see com.blog.www.guideview.GuideBuilder
  * Created by binIoter
  */
+
 public interface Component {
 
   public final static int FIT_START = MaskView.LayoutParams.PARENT_START;

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 /**
  * Created by binIoter
  */
+
 class Common {
   /**
    * 设置Component

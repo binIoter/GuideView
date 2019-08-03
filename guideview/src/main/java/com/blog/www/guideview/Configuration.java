@@ -5,9 +5,10 @@ import android.os.Parcelable;
 import android.view.View;
 
 /**
- * 遮罩系统创建时配置参数的封装
+ * 遮罩系统创建时配置参数的封装 <br/>
  * Created by binIoter
  */
+
 class Configuration implements Parcelable {
 
   /**
@@ -37,9 +38,9 @@ class Configuration implements Parcelable {
   int mPaddingBottom = 0;
 
   /**
-   *
+   * 是否可以透过蒙层点击，默认不可以
    */
-  boolean mOutsideTouchable;
+  boolean mOutsideTouchable = false;
 
   /**
    * 遮罩透明度
@@ -89,11 +90,13 @@ class Configuration implements Parcelable {
 
   int mExitAnimationId = -1;
 
-  @Override public int describeContents() {
+  @Override
+  public int describeContents() {
     return 0;
   }
 
-  @Override public void writeToParcel(Parcel dest, int flags) {
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(mAlpha);
     dest.writeInt(mFullingViewId);
     dest.writeInt(mTargetViewId);
@@ -110,7 +113,8 @@ class Configuration implements Parcelable {
   }
 
   public static final Creator<Configuration> CREATOR = new Creator<Configuration>() {
-    @Override public Configuration createFromParcel(Parcel source) {
+    @Override
+    public Configuration createFromParcel(Parcel source) {
       Configuration conf = new Configuration();
       conf.mAlpha = source.readInt();
       conf.mFullingViewId = source.readInt();
@@ -128,7 +132,8 @@ class Configuration implements Parcelable {
       return conf;
     }
 
-    @Override public Configuration[] newArray(int size) {
+    @Override
+    public Configuration[] newArray(int size) {
       return new Configuration[size];
     }
   };

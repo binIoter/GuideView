@@ -19,16 +19,7 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity
-      android:name="com.demo.aty.FullActivity"
-      android:screenOrientation="portrait" />
-    <activity
-      android:name="com.demo.aty.FragActivity"
-      android:screenOrientation="portrait" />
-    <activity
-      android:name="com.demo.aty.ViewActivity"
-      android:screenOrientation="portrait" />
-    <activity
+      <activity
       android:name="com.demo.aty.MyListActivity"
       android:screenOrientation="portrait" />
   </application>

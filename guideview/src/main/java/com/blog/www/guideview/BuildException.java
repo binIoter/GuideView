@@ -4,6 +4,7 @@ package com.blog.www.guideview;
  * 遮罩系统运行异常的封装
  * Created by binIoter
  */
+
 class BuildException extends RuntimeException {
 
     private static final long serialVersionUID = 6208777692136933357L;
