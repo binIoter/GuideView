@@ -1,4 +1,4 @@
-package com.blog.www.guideview;
+package com.binioter.guideview;
 
 import android.support.annotation.AnimatorRes;
 import android.support.annotation.IdRes;
@@ -10,18 +10,15 @@ import java.util.List;
 
 /**
  *
- * <h1>遮罩系统构建器
- * <p>
+ * <h1>遮罩系统构建器</h1>
  * 本系统能够快速的为一个Activity里的任何一个View控件创建一个遮罩式的引导页。
  * </p>
  * <h3>工作原理</h3>
- * <p>
  * 首先它需要一个目标View或者它的id,我们通过findViewById来得到这个View，计算它在屏幕上的区域targetRect,参见
  * {@link #setTargetViewId(int)}与{@link #setTargetView(View)}通过这个区域，
  * 开始绘制一个覆盖整个Activity的遮罩，可以定义蒙板的颜色{@link #setFullingColorId(int)}和透明度
  * {@link #setAlpha(int)}。然而目标View的区域不会被绘制从而实现高亮的效果。
  * </p>
- * <p>
  * 接下来是在相对于这个targetRect的区域绘制一些图片或者文字。我们把这样一张图片或者文字抽象成一个Component接口
  * {@link Component},设置文字或者图片等
  * {@link Component#getView(android.view.LayoutInflater)}
@@ -29,14 +26,11 @@ import java.util.List;
  * {@link Component#getXOffset()} ;y偏移量,
  * {@link Component#getYOffset()}。
  * </p>
- * <p>
  * 可以对遮罩系统设置可见状态的发生变化时的监听回调
  * {@link #setOnVisibilityChangedListener(OnVisibilityChangedListener)}
  * </p>
- * <p>
  * 可以对遮罩系统设置开始和结束时的动画效果 {@link #setEnterAnimationId(int)}
  * {@link #setExitAnimationId(int)}
- * </p>
  * </p>
  *
  * Created by binIoter

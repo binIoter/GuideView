@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.blog.www.guideview.Component;
+import com.binioter.guideview.Component;
 import com.demo.guide.R;
 
 /**

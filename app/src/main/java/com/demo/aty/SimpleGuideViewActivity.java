@@ -7,9 +7,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.blog.www.guideview.Component;
-import com.blog.www.guideview.Guide;
-import com.blog.www.guideview.GuideBuilder;
+import com.binioter.guideview.Component;
+import com.binioter.guideview.Guide;
+import com.binioter.guideview.GuideBuilder;
 import com.demo.component.LottieComponent;
 import com.demo.component.MutiComponent;
 import com.demo.component.SimpleComponent;

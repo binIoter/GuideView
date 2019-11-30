@@ -1,4 +1,4 @@
-package com.blog.www.guideview;
+package com.binioter.guideview;
 
 import android.content.Context;
 
