@@ -94,7 +94,7 @@ class MaskView extends ViewGroup {
         int width = displayMetrics.widthPixels;
         int height = displayMetrics.heightPixels;
         mOverlayRect.set(0, 0, width, height);
-        mEraserBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ALPHA_8);
+        mEraserBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         mEraserCanvas = new Canvas(mEraserBitmap);
         mFullingPaint = new Paint();
         mEraser = new Paint();
