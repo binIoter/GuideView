@@ -7,9 +7,10 @@
 
  * <h3>使用方法</h3>
  *  <h4>1.添加gradle依赖</h4>
+ 
         implementation 'com.binioter:guideview:1.0.0'
         
- *  <h4>1.编写用于在高亮区域周围展示的component</h4>
+ *  <h4>2.编写用于在高亮区域周围展示的component</h4>
  *  
         public class SimpleComponent implements Component {
             
@@ -41,7 +42,7 @@
           }
         }
         
-*  <h4>2.展示引导蒙层，并监听蒙层展示、隐藏事件</h4>
+*  <h4>3.展示引导蒙层，并监听蒙层展示、隐藏事件</h4>
 *  
          public void showGuideView() {
             GuideBuilder builder = new GuideBuilder();
