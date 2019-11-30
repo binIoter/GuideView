@@ -23,4 +23,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.airbnb.android:lottie:3.0.7'
     implementation project(':guideview')
+    //implementation 'com.binioter:guideview:1.0.0'
 }

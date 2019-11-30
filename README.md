@@ -6,6 +6,9 @@
  * <img src = "https://github.com/binIoter/GuideView/blob/master/app/src/main/assets/guide.gif"></img>
 
  * <h3>使用方法</h3>
+ *  <h4>1.添加gradle依赖</h4>
+        implementation 'com.binioter:guideview:1.0.0'
+        
  *  <h4>1.编写用于在高亮区域周围展示的component</h4>
  *  
         public class SimpleComponent implements Component {

@@ -24,5 +24,3 @@ allprojects {
 //    options.addStringOption('Xdoclint:none', '-quiet')
 //    options.addStringOption('encoding', 'UTF-8')
 //}
-
-tasks.getByPath(":guideview:javadocRelease").enabled = false
