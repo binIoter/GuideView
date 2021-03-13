@@ -323,6 +323,19 @@ public class GuideBuilder {
     }
 
     /**
+     * 是否高粱展示父 view
+     *
+     * @return GuideBuilder
+     */
+    public GuideBuilder setIsHighlightParent(boolean isHighlightParent) {
+        if (mBuilt) {
+            throw new BuildException("Already created. rebuild a new one.");
+        }
+        mConfiguration.mIsHighlightShowParent = isHighlightParent;
+        return this;
+    }
+
+    /**
      * 创建Guide，非Fragment版本
      *
      * @return Guide

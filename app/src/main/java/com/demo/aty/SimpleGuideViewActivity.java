@@ -67,7 +67,8 @@ public class SimpleGuideViewActivity extends Activity {
     final GuideBuilder builder1 = new GuideBuilder();
     builder1.setTargetView(ll_nearby)
             .setAlpha(150)
-            .setHighTargetGraphStyle(Component.CIRCLE);
+            .setHighTargetGraphStyle(Component.ROUNDRECT)
+            .setIsHighlightParent(true);
     builder1.setOnVisibilityChangedListener(new GuideBuilder.OnVisibilityChangedListener() {
       @Override
       public void onShown() {
