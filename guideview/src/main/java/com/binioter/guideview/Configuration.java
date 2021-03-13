@@ -90,6 +90,11 @@ class Configuration implements Parcelable {
 
   int mExitAnimationId = -1;
 
+  /**
+   * 是否高亮显示父 view
+   */
+  boolean mIsHighlightShowParent = false;
+
   @Override
   public int describeContents() {
     return 0;
@@ -110,6 +115,7 @@ class Configuration implements Parcelable {
     dest.writeInt(mGraphStyle);
     dest.writeByte((byte) (mAutoDismiss ? 1 : 0));
     dest.writeByte((byte) (mOverlayTarget ? 1 : 0));
+    dest.writeByte((byte) (mIsHighlightShowParent ? 1 : 0));
   }
 
   public static final Creator<Configuration> CREATOR = new Creator<Configuration>() {
@@ -129,6 +135,7 @@ class Configuration implements Parcelable {
       conf.mGraphStyle = source.readInt();
       conf.mAutoDismiss = source.readByte() == 1;
       conf.mOverlayTarget = source.readByte() == 1;
+      conf.mIsHighlightShowParent = source.readByte() == 1;
       return conf;
     }
 
