@@ -33,12 +33,7 @@ public class SimpleGuideViewActivity extends Activity {
     });
     ll_nearby = (LinearLayout) findViewById(R.id.ll_nearby);
     ll_video = (LinearLayout) findViewById(R.id.ll_video);
-    header_imgbtn.post(new Runnable() {
-      @Override
-      public void run() {
         showGuideView();
-      }
-    });
   }
 
   public void showGuideView() {
