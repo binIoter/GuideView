@@ -2,10 +2,12 @@ package com.binioter.guideview;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -55,8 +57,23 @@ public class Guide implements View.OnKeyListener, View.OnTouchListener {
      *
      * @param activity 目标Activity
      */
-    public void show(Activity activity) {
-        show(activity, null);
+    public void show(final Activity activity) {
+        View target = mConfiguration.mTargetView;
+        if (target == null) {
+            target = activity.findViewById(mConfiguration.mTargetViewId);
+        }
+        if (target != null) {
+            if (mConfiguration.mTargetView.getMeasuredWidth() > 0 && mConfiguration.mTargetView.getMeasuredHeight() > 0) {
+                show(activity, null);
+            } else {
+                mConfiguration.mTargetView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        show(activity, null);
+                    }
+                });
+            }
+        }
     }
 
     /**
@@ -69,6 +86,26 @@ public class Guide implements View.OnKeyListener, View.OnTouchListener {
         mMaskView = onCreateView(activity, overlay);
         if (overlay == null) {
             overlay = (ViewGroup) activity.getWindow().getDecorView();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+                final ViewGroup finalOverlay = overlay;
+                final Activity finalActivity = activity;
+                overlay.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
+                    private boolean executedBefore = false;
+
+                    @Override
+                    public WindowInsets onApplyWindowInsets(View v, WindowInsets insets) {
+                        if (insets.getSystemWindowInsetTop() > 0) {
+                            if (!executedBefore && mMaskView.isAttachedToWindow()) {  //如果状态栏由隐藏变为显示此时如果已经展示了，重新展示一遍
+                                dismiss();
+                                show(finalActivity, finalOverlay);
+                                executedBefore = true;
+                            }
+
+                        }
+                        return insets;
+                    }
+                });
+            }
         }
         if (mMaskView.getParent() == null && mConfiguration.mTargetView != null) {
             overlay.addView(mMaskView);
