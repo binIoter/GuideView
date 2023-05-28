@@ -22,88 +22,98 @@ import java.util.List;
  * 描述:
  */
 public class MyListActivity extends Activity {
-  ListView listView;
-  BaseAdapter adapter;
-  static List<String> arrayList = new ArrayList<>();
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.my_list_layout);
-    for (int i = 1; i < 200; i++) {
-      arrayList.add("第" + i + "行");
-    }
-    listView = (ListView) findViewById(R.id.list);
-    adapter = new MyAdapter(this);
-    listView.setAdapter(adapter);
-  }
+    ListView listView;
 
-  private static class MyAdapter extends BaseAdapter {
-    private Context mContext;
-    private int showTimes = 0;
+    BaseAdapter adapter;
 
-    public MyAdapter(Context context) {
-      this.mContext = context;
+    static List<String> arrayList = new ArrayList<>();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.my_list_layout);
+        for (int i = 1; i < 200; i++) {
+            arrayList.add("第" + i + "行");
+        }
+        listView = (ListView) findViewById(R.id.list);
+        adapter = new MyAdapter(this);
+        listView.setAdapter(adapter);
     }
 
-    @Override public int getCount() {
-      return arrayList.size();
-    }
+    private static class MyAdapter extends BaseAdapter {
 
-    @Override public Object getItem(int i) {
-      return arrayList.get(i);
-    }
+        private Context mContext;
 
-    @Override public long getItemId(int i) {
-      return i;
-    }
+        private int showTimes = 0;
 
-    @Override public View getView(int i, View view, ViewGroup viewGroup) {
-      ViewHolder holder;
-      if (view == null) {
-        view = LayoutInflater.from(mContext).inflate(R.layout.item, viewGroup, false);
-        holder = new ViewHolder();
-        holder.btn = (Button) view.findViewById(R.id.btn);
-        view.setTag(holder);
-      } else {
-        holder = (ViewHolder) view.getTag();
-      }
-      holder.btn.setText(arrayList.get(i));
-      if (i == 5 && showTimes == 0) {
-        final View finalView = view;
-        view.post(new Runnable() {
-          @Override public void run() {
-            showGuideView(finalView);
-          }
-        });
-      }
-      return view;
-    }
-
-    public void showGuideView(View targetView) {
-      showTimes++;
-      GuideBuilder builder = new GuideBuilder();
-      builder.setTargetView(targetView)
-          .setAlpha(150)
-          .setHighTargetCorner(20)
-          .setHighTargetPadding(10)
-          .setOverlayTarget(false)
-          .setOutsideTouchable(false);
-      builder.setOnVisibilityChangedListener(new GuideBuilder.OnVisibilityChangedListener() {
-        @Override public void onShown() {
+        public MyAdapter(Context context) {
+            this.mContext = context;
         }
 
-        @Override public void onDismiss() {
+        @Override
+        public int getCount() {
+            return arrayList.size();
         }
-      });
 
-      builder.addComponent(new MutiComponent());
-      Guide guide = builder.createGuide();
-      guide.setShouldCheckLocInWindow(true);
-      guide.show((Activity) mContext);
-    }
+        @Override
+        public Object getItem(int i) {
+            return arrayList.get(i);
+        }
 
-    private static class ViewHolder {
-      private Button btn;
+        @Override
+        public long getItemId(int i) {
+            return i;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            ViewHolder holder;
+            if (view == null) {
+                view = LayoutInflater.from(mContext).inflate(R.layout.item, viewGroup, false);
+                holder = new ViewHolder();
+                holder.btn = (Button) view.findViewById(R.id.btn);
+                view.setTag(holder);
+            } else {
+                holder = (ViewHolder) view.getTag();
+            }
+            holder.btn.setText(arrayList.get(i));
+            if (i == 5 && showTimes == 0) {
+                final View finalView = view;
+                view.post(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        showGuideView(finalView);
+                    }
+                });
+            }
+            return view;
+        }
+
+        public void showGuideView(View targetView) {
+            showTimes++;
+            GuideBuilder builder = new GuideBuilder();
+            builder.setTargetView(targetView).setAlpha(150).setHighTargetCorner(20).setHighTargetPadding(10).setOverlayTarget(false).setOutsideTouchable(false);
+            builder.setOnVisibilityChangedListener(new GuideBuilder.OnVisibilityChangedListener() {
+
+                @Override
+                public void onShown() {
+                }
+
+                @Override
+                public void onDismiss() {
+                }
+            });
+            builder.addComponent(new MutiComponent());
+            Guide guide = builder.createGuide();
+            guide.setShouldCheckLocInWindow(true);
+            guide.show((Activity) mContext);
+        }
+
+        private static class ViewHolder {
+
+            private Button btn;
+        }
     }
-  }
 }

@@ -14,18 +14,18 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 /**
  * Created by binIoter
  */
-
 class MaskView extends ViewGroup {
+
     /**
      * 高亮区域
      */
     private final RectF mTargetRect = new RectF();
+
     /**
      * 蒙层区域
      */
@@ -35,35 +35,47 @@ class MaskView extends ViewGroup {
      * 中间变量
      */
     private final RectF mChildTmpRect = new RectF();
+
     /**
      * 蒙层背景画笔
      */
     private final Paint mFullingPaint;
+
     private int mPadding = 0;
+
     private int mPaddingLeft = 0;
+
     private int mPaddingTop = 0;
+
     private int mPaddingRight = 0;
+
     private int mPaddingBottom = 0;
+
     /**
      * 是否覆盖目标区域
      */
     private boolean mOverlayTarget = false;
+
     /**
      * 圆角大小
      */
     private int mCorner = 0;
+
     /**
      * 目标区域样式，默认为矩形
      */
     private int mStyle = Component.ROUNDRECT;
+
     /**
      * 挖空画笔
      */
     private Paint mEraser;
+
     /**
      * 橡皮擦Bitmap
      */
     private Bitmap mEraserBitmap;
+
     /**
      * 橡皮擦Cavas
      */
@@ -72,7 +84,9 @@ class MaskView extends ViewGroup {
     private boolean ignoreRepadding;
 
     private int mInitHeight;
+
     private int mChangedHeight = 0;
+
     private boolean mFirstFlag = true;
 
     public MaskView(Context context) {
@@ -87,7 +101,6 @@ class MaskView extends ViewGroup {
         super(context, attrs, defStyle);
         //自我绘制
         setWillNotDraw(false);
-
         WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getRealMetrics(displayMetrics);
@@ -136,7 +149,6 @@ class MaskView extends ViewGroup {
         setMeasuredDimension(w, h);
         mOverlayRect.set(0, 0, w, h);
         resetOutPath();
-
         final int count = getChildCount();
         View child;
         for (int i = 0; i < count; i++) {
@@ -161,28 +173,33 @@ class MaskView extends ViewGroup {
             if (lp == null) {
                 continue;
             }
-            switch (lp.targetAnchor) {
-                case LayoutParams.ANCHOR_LEFT://左
+            switch(lp.targetAnchor) {
+                case //左
+                LayoutParams.ANCHOR_LEFT:
                     mChildTmpRect.right = mTargetRect.left;
                     mChildTmpRect.left = mChildTmpRect.right - child.getMeasuredWidth();
                     verticalChildPositionLayout(child, mChildTmpRect, lp.targetParentPosition);
                     break;
-                case LayoutParams.ANCHOR_TOP://上
+                case //上
+                LayoutParams.ANCHOR_TOP:
                     mChildTmpRect.bottom = mTargetRect.top;
                     mChildTmpRect.top = mChildTmpRect.bottom - child.getMeasuredHeight();
                     horizontalChildPositionLayout(child, mChildTmpRect, lp.targetParentPosition);
                     break;
-                case LayoutParams.ANCHOR_RIGHT://右
+                case //右
+                LayoutParams.ANCHOR_RIGHT:
                     mChildTmpRect.left = mTargetRect.right;
                     mChildTmpRect.right = mChildTmpRect.left + child.getMeasuredWidth();
                     verticalChildPositionLayout(child, mChildTmpRect, lp.targetParentPosition);
                     break;
-                case LayoutParams.ANCHOR_BOTTOM://下
+                case //下
+                LayoutParams.ANCHOR_BOTTOM:
                     mChildTmpRect.top = mTargetRect.bottom;
                     mChildTmpRect.bottom = mChildTmpRect.top + child.getMeasuredHeight();
                     horizontalChildPositionLayout(child, mChildTmpRect, lp.targetParentPosition);
                     break;
-                case LayoutParams.ANCHOR_OVER://中心
+                case //中心
+                LayoutParams.ANCHOR_OVER:
                     mChildTmpRect.left = ((int) mTargetRect.width() - child.getMeasuredWidth()) >> 1;
                     mChildTmpRect.top = ((int) mTargetRect.height() - child.getMeasuredHeight()) >> 1;
                     mChildTmpRect.right = ((int) mTargetRect.width() + child.getMeasuredWidth()) >> 1;
@@ -191,15 +208,13 @@ class MaskView extends ViewGroup {
                     break;
             }
             //额外的xy偏移
-            mChildTmpRect.offset((int) (density * lp.offsetX + 0.5f),
-                    (int) (density * lp.offsetY + 0.5f));
-            child.layout((int) mChildTmpRect.left, (int) mChildTmpRect.top, (int) mChildTmpRect.right,
-                    (int) mChildTmpRect.bottom);
+            mChildTmpRect.offset((int) (density * lp.offsetX + 0.5f), (int) (density * lp.offsetY + 0.5f));
+            child.layout((int) mChildTmpRect.left, (int) mChildTmpRect.top, (int) mChildTmpRect.right, (int) mChildTmpRect.bottom);
         }
     }
 
     private void horizontalChildPositionLayout(View child, RectF rect, int targetParentPosition) {
-        switch (targetParentPosition) {
+        switch(targetParentPosition) {
             case LayoutParams.PARENT_START:
                 rect.left = mTargetRect.left;
                 rect.right = rect.left + child.getMeasuredWidth();
@@ -217,7 +232,7 @@ class MaskView extends ViewGroup {
     }
 
     private void verticalChildPositionLayout(View child, RectF rect, int targetParentPosition) {
-        switch (targetParentPosition) {
+        switch(targetParentPosition) {
             case LayoutParams.PARENT_START:
                 rect.top = mTargetRect.top;
                 rect.bottom = rect.top + child.getMeasuredHeight();
@@ -286,7 +301,6 @@ class MaskView extends ViewGroup {
                 drawChild(canvas, child, drawingTime);
             }
         } catch (NullPointerException e) {
-
         }
     }
 
@@ -301,13 +315,12 @@ class MaskView extends ViewGroup {
         mEraserBitmap.eraseColor(Color.TRANSPARENT);
         mEraserCanvas.drawColor(mFullingPaint.getColor());
         if (!mOverlayTarget) {
-            switch (mStyle) {
+            switch(mStyle) {
                 case Component.ROUNDRECT:
                     mEraserCanvas.drawRoundRect(mTargetRect, mCorner, mCorner, mEraser);
                     break;
                 case Component.CIRCLE:
-                    mEraserCanvas.drawCircle(mTargetRect.centerX(), mTargetRect.centerY(),
-                            mTargetRect.width() / 2, mEraser);
+                    mEraserCanvas.drawCircle(mTargetRect.centerX(), mTargetRect.centerY(), mTargetRect.width() / 2, mEraser);
                     break;
                 default:
                     mEraserCanvas.drawRoundRect(mTargetRect, mCorner, mCorner, mEraser);
@@ -364,18 +377,27 @@ class MaskView extends ViewGroup {
     static class LayoutParams extends ViewGroup.LayoutParams {
 
         public static final int ANCHOR_LEFT = 0x01;
+
         public static final int ANCHOR_TOP = 0x02;
+
         public static final int ANCHOR_RIGHT = 0x03;
+
         public static final int ANCHOR_BOTTOM = 0x04;
+
         public static final int ANCHOR_OVER = 0x05;
 
         public static final int PARENT_START = 0x10;
+
         public static final int PARENT_CENTER = 0x20;
+
         public static final int PARENT_END = 0x30;
 
         public int targetAnchor = ANCHOR_BOTTOM;
+
         public int targetParentPosition = PARENT_CENTER;
+
         public int offsetX = 0;
+
         public int offsetY = 0;
 
         public LayoutParams(Context c, AttributeSet attrs) {

@@ -16,7 +16,6 @@ import android.view.animation.AnimationUtils;
  * <p>
  * Created by binIoter
  */
-
 public class Guide implements View.OnKeyListener, View.OnTouchListener {
 
     Guide() {
@@ -26,12 +25,18 @@ public class Guide implements View.OnKeyListener, View.OnTouchListener {
      * 滑动临界值
      */
     private static final int SLIDE_THRESHOLD = 30;
+
     private Configuration mConfiguration;
+
     private MaskView mMaskView;
+
     private Component[] mComponents;
+
     // 根据locInwindow定位后，是否需要判断loc值非0
     private boolean mShouldCheckLocInWindow = true;
+
     private GuideBuilder.OnVisibilityChangedListener mOnVisibilityChangedListener;
+
     private GuideBuilder.OnSlideListener mOnSlideListener;
 
     void setConfiguration(Configuration configuration) {
@@ -76,9 +81,9 @@ public class Guide implements View.OnKeyListener, View.OnTouchListener {
                 Animation anim = AnimationUtils.loadAnimation(activity, mConfiguration.mEnterAnimationId);
                 assert anim != null;
                 anim.setAnimationListener(new Animation.AnimationListener() {
+
                     @Override
                     public void onAnimationStart(Animation animation) {
-
                     }
 
                     @Override
@@ -90,7 +95,6 @@ public class Guide implements View.OnKeyListener, View.OnTouchListener {
 
                     @Override
                     public void onAnimationRepeat(Animation animation) {
-
                     }
                 });
                 mMaskView.startAnimation(anim);
@@ -129,13 +133,12 @@ public class Guide implements View.OnKeyListener, View.OnTouchListener {
             // mMaskView may leak if context is null
             Context context = mMaskView.getContext();
             assert context != null;
-
             Animation anim = AnimationUtils.loadAnimation(context, mConfiguration.mExitAnimationId);
             assert anim != null;
             anim.setAnimationListener(new Animation.AnimationListener() {
+
                 @Override
                 public void onAnimationStart(Animation animation) {
-
                 }
 
                 @Override
@@ -149,7 +152,6 @@ public class Guide implements View.OnKeyListener, View.OnTouchListener {
 
                 @Override
                 public void onAnimationRepeat(Animation animation) {
-
                 }
             });
             mMaskView.startAnimation(anim);
@@ -185,7 +187,6 @@ public class Guide implements View.OnKeyListener, View.OnTouchListener {
         maskView.setHighTargetGraphStyle(mConfiguration.mGraphStyle);
         maskView.setOverlayTarget(mConfiguration.mOverlayTarget);
         maskView.setOnKeyListener(this);
-
         // For removing the height of status bar we need the root content view's
         // location on screen
         int parentX = 0;
@@ -196,7 +197,6 @@ public class Guide implements View.OnKeyListener, View.OnTouchListener {
             parentX = loc[0];
             parentY = loc[1];
         }
-
         if (mConfiguration.mTargetView != null) {
             maskView.setTargetRect(Common.getViewAbsRect(mConfiguration.mTargetView, parentX, parentY));
         } else {
@@ -206,18 +206,15 @@ public class Guide implements View.OnKeyListener, View.OnTouchListener {
                 maskView.setTargetRect(Common.getViewAbsRect(target, parentX, parentY));
             }
         }
-
         if (mConfiguration.mOutsideTouchable) {
             maskView.setClickable(false);
         } else {
             maskView.setOnTouchListener(this);
         }
-
         // Adds the components to the mask view.
         for (Component c : mComponents) {
             maskView.addView(Common.componentToView(activity.getLayoutInflater(), c));
         }
-
         return maskView;
     }
 
@@ -254,10 +251,8 @@ public class Guide implements View.OnKeyListener, View.OnTouchListener {
                 if (mOnSlideListener != null) {
                     mOnSlideListener.onSlideListener(GuideBuilder.SlideState.UP);
                 }
-            } else if (motionEvent.getY() - startY > DimenUtil.dp2px(view.getContext(), SLIDE_THRESHOLD)) {
-                if (mOnSlideListener != null) {
-                    mOnSlideListener.onSlideListener(GuideBuilder.SlideState.DOWN);
-                }
+            } else if (motionEvent.getY() - startY > DimenUtil.dp2px(view.getContext(), SLIDE_THRESHOLD) && mOnSlideListener != null) {
+                mOnSlideListener.onSlideListener(GuideBuilder.SlideState.DOWN);
             }
             if (mConfiguration != null && mConfiguration.mAutoDismiss) {
                 dismiss();
