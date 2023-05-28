@@ -251,10 +251,8 @@ public class Guide implements View.OnKeyListener, View.OnTouchListener {
                 if (mOnSlideListener != null) {
                     mOnSlideListener.onSlideListener(GuideBuilder.SlideState.UP);
                 }
-            } else if (motionEvent.getY() - startY > DimenUtil.dp2px(view.getContext(), SLIDE_THRESHOLD)) {
-                if (mOnSlideListener != null) {
-                    mOnSlideListener.onSlideListener(GuideBuilder.SlideState.DOWN);
-                }
+            } else if (motionEvent.getY() - startY > DimenUtil.dp2px(view.getContext(), SLIDE_THRESHOLD) && mOnSlideListener != null) {
+                mOnSlideListener.onSlideListener(GuideBuilder.SlideState.DOWN);
             }
             if (mConfiguration != null && mConfiguration.mAutoDismiss) {
                 dismiss();
